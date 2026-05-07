@@ -1,4 +1,4 @@
-# 📇 Workshop :
+# 🚚  Workshop : Shipping Cost Calculator
 
 A **Java console application** built using **Spring Core (IoC + DI)** that calculates shipping costs based on destination, speed, and weight using a flexible strategy-based architecture.
 
@@ -7,14 +7,14 @@ A **Java console application** built using **Spring Core (IoC + DI)** that calcu
 ## 📝 Table of Contents
 
 1. [✨ Features](#-features)
-2. [📂 Folder Structure](#-folder-structure)
-3. [🛠 Available Options](#-available-options)
-4. [🗃 Data Structure](#-data-structure)
-5. [✅ Input Validation](#-input-validation)
-6. [🧪 JUnit Testing](#-junit-testing)
+2. [📌 Workshop Document](#-workshop-document)
+3. [📂 Folder Structure](#-folder-structure)
+4. [🛠 Available Options](#-available-options)
+5. [🗃 Data Structure](#-data-structure)
+6. [🔧 Spring Concepts Used](#-spring-concepts-used)
 7. [🚀 How to Run](#-how-to-run)
 8. [⚡ Expected Output :](#-expected-output-)
-9. [📌 Workshop Document](#-workshop-document)
+
 ---
 
 ## 📌 Workshop Document
@@ -85,6 +85,7 @@ Each option has a different pricing strategy based on base cost and cost per kg.
 - Destination
 - Speed
 - Weight (kg)
+
 ```ShippingCostCalculator``` → Strategy interface 
 Multiple implementations:
 - StandardDomesticShipping
