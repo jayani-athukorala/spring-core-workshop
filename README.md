@@ -1,127 +1,156 @@
-![Lexicon Logo](https://lexicongruppen.se/media/wi5hphtd/lexicon-logo.svg)
+# 📇 Workshop :
 
-# Workshop: Shipping Cost Calculator
-
-The **Shipping Cost Calculator** is a small console-based Java application that calculates the cost of shipping an order
-based on a few simple inputs.
-
-The goal of the application is to determine **how much shipping should cost** depending on **how and where** a package
-is being shipped.
+A **Java console application** built using **Spring Core (IoC + DI)** that calculates shipping costs based on destination, speed, and weight using a flexible strategy-based architecture.
 
 ---
 
-## 🔗 Repository
+## 📝 Table of Contents
 
-Fork the repository to get started:
+1. [✨ Features](#-features)
+2. [📂 Folder Structure](#-folder-structure)
+3. [🛠 Available Options](#-available-options)
+4. [🗃 Data Structure](#-data-structure)
+5. [✅ Input Validation](#-input-validation)
+6. [🧪 JUnit Testing](#-junit-testing)
+7. [🚀 How to Run](#-how-to-run)
+8. [⚡ Expected Output :](#-expected-output-)
+9. [📌 Workshop Document](#-workshop-document)
+---
 
-🔗 **[Shipping Cost Calculator Repository](https://github.com/mehrdad-javan/Shipping-Cost-Calculator)**
+## 📌 Workshop Document
 
-> **Note:** Make sure to fork the repository to your own GitHub account before cloning it locally.
+You can find the workshop description here:
+
+[Workshop Document](Spring_Core_Workshop.md)
+
+---
+## ✨ Features
+
+- Calculates shipping cost based on:
+  - Destination (DOMESTIC / INTERNATIONAL)
+  - Shipping Speed (STANDARD / EXPRESS)
+  - Package weight (kg)
+- Uses Strategy Pattern for pricing rules
+- Fully managed by Spring IoC Container
+- Supports multiple shipping strategies
+- Easily extensible without modifying existing logic
+- Clean separation of concerns (Service, Factory, Calculators)
 
 ---
 
-## 🚚 What Does the Application Do?
+## 📂 Folder Structure
 
-The application receives a **shipping request** that contains:
+```
+src
+└── main
+    ├── java/se/lexicon
+    │   ├── calculator
+    │   │   ├── StandardDomesticShipping.java
+    │   │   ├── ExpressDomesticShipping.java
+    │   │   ├── StandardInternationalShipping.java
+    │   │   └── ExpressInternationalShipping.java
+    │   ├── config
+    │   │   └── ShippingCostCalculatorConfig.java
+    │   ├── model
+    │   │   ├── Destination.java
+    │   │   ├── Speed.java
+    │   │   └── ShippingRequest.java
+    │   ├── service
+    │   │   ├── ShippingService.java
+    │   │   ├── ShippingCostCalculator.java
+    │   │   └── ShippingCalculatorFactory.java
+    │   └── Main.java
+    └── resources
+        ├── application.properties
+        ├── application-dev.properties
+        └── application-prod.properties
+```
+---
+## 🛠 Available Options
 
-- **Destination**
-    - `DOMESTIC`
-    - `INTERNATIONAL`
+The system supports the following shipping combinations:
 
-- **Shipping Speed**
-    - `STANDARD`
-    - `EXPRESS`
+- Domestic Standard
+- Domestic Express
+- International Standard
+- International Express
 
-- **Package Weight**
-    - Weight in kilograms
+Each option has a different pricing strategy based on base cost and cost per kg.
 
-Based on this information, the application selects the **correct shipping strategy** and calculates the final shipping
-cost.
+
+---
+## 🗃 Data Structure
+
+```ShippingRequest``` → Immutable record containing:
+- Destination
+- Speed
+- Weight (kg)
+```ShippingCostCalculator``` → Strategy interface 
+Multiple implementations:
+- StandardDomesticShipping
+- ExpressDomesticShipping
+- StandardInternationalShipping
+- ExpressInternationalShipping
 
 ---
 
-## How the Logic Is Structured
+## 🔧 Spring Concepts Used
 
-The application is designed using **interfaces and multiple implementations**:
+- Spring IoC Container
+- Component Scanning (```@Component```)
+- Dependency Injection (Constructor Injection)
+- Factory Pattern with Spring Beans
+- ```@Value``` for externalized configuration
+- ```@PostConstruct``` for bean initialization logging
 
-- A common interface:
-    - `ShippingCostCalculator`
+---
+## 🚀 How to Run
 
-- Multiple implementations of that interface, each responsible for a specific case:
-    - Standard Domestic Shipping
-    - Express International Shipping
+1. Clone the repository.
 
-Each implementation knows:
+```git clone https://github.com/jayani-athukorala/spring-core-workshop.git```
 
-- **Which type of request it supports**
-- **How to calculate the cost for that request**
+2. Build with Maven:
+    ```bash
+    mvn clean install
+    ```
 
-This design allows the application to:
-
-- Support multiple shipping rules
-- Be extended easily without rewriting existing logic
+3. Run the CLI:
+   ```bash
+    java -cp target/classes se.lexicon.Main
+    ```
 
 ---
 
-## Supporting Components
+## ⚡ Expected Output :
 
-To coordinate the calculation process, the application uses:
+```
+=== Creating Beans ===
+✅ DomesticExpressShipping bean created.
+✅ ExpressInternationalShipping bean created.
+✅ InternationalStandardShipping bean created.
+✅ StandardDomesticShipping bean created.
 
-- **A factory**
-    - Selects the correct `ShippingCostCalculator` based on the request
+=== Shipping Quote ===
+Domestic Standard (10kg)
+Estimated Charge: 17.0
 
-- **A service**
-    - Uses the factory to calculate and return the shipping cost
+International Express (15kg)
+Estimated Charge: 92.5
 
-- **A main entry point**
-    - Creates objects
-    - Wires dependencies together
-    - Runs the application
+Domestic Standard (5kg)
+Estimated Charge: 11.0
 
-At this stage, **all objects are created manually using `new`**.
+International Express (20kg)
+Estimated Charge: 115.0
 
----
+Domestic Express (10kg)
+Estimated Charge: 40.0
 
-## Your Task
+International Standard (10kg)
+Estimated Charge: 42.0
 
-Your task is to **refactor this application using the Spring Framework**.
-
-Currently, the application is written using **pure Java**, where:
-
-- Objects are created manually using `new`
-- Dependencies are wired together in the `main` method
-
-You will replace this manual wiring by using **Spring Core features**.
-
-Refactor the application so that:
-
-- Object creation is handled by the **Spring IoC Container**
-- Dependencies are injected using **Spring Dependency Injection (DI)**
-- The application logic remains the same, but **Spring manages the object graph**
-
-1. Configure the Spring Container
-2. Register Application Classes as Spring Beans
-3. Use Constructor-Based Dependency Injection
-4. Transfer Object Creation to the IoC Container
-
----
-
-## Optional Tasks
-
-1. **Add More Shipping Strategies**
-    - Domestic Express
-    - International Standard
-
-2. **Log Bean Creation**
-    - Add `@PostConstruct` to each shipping calculator
-    - Print a message when the bean is created
-
-3. **Use `application.properties`**
-    - Move pricing values (base cost, cost per kg) to properties
-    - Inject them into calculators
-
-4. **Use Spring Profiles**
-    - Create `dev` and `prod` profiles
-    - Use different prices per profile
+Process finished with exit code 0
+```
 
 ---

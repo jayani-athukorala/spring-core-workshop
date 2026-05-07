@@ -17,6 +17,8 @@ import java.util.List;
 public class Main {
     static void main() {
 
+        IO.println("=== Creating Beans ===");
+
 //        ApplicationContext context = new AnnotationConfigApplicationContext(ShippingCostCalculatorConfig.class);
 
         //Pricing for DEV
@@ -28,22 +30,41 @@ public class Main {
         ShippingService shippingService = context.getBean(ShippingService.class);
 
         ShippingRequest domesticStandardRequest = new ShippingRequest(Destination.DOMESTIC, Speed.STANDARD, 10.0);
-        System.out.println("Shipping cost: " + shippingService.quote(domesticStandardRequest));
-
         ShippingRequest internationalExpressRequest = new ShippingRequest(Destination.INTERNATIONAL, Speed.EXPRESS, 15.0);
-        System.out.println("Shipping cost: " + shippingService.quote(internationalExpressRequest));
-
         ShippingRequest lightDomesticRequest = new ShippingRequest(Destination.DOMESTIC, Speed.STANDARD, 5.0);
-        System.out.println("Shipping cost: " + shippingService.quote(lightDomesticRequest));
-
         ShippingRequest heavyInternationalExpressRequest = new ShippingRequest(Destination.INTERNATIONAL, Speed.EXPRESS, 20.0);
-        System.out.println("Shipping cost: " + shippingService.quote(heavyInternationalExpressRequest));
-
         // Test new Strategies
         ShippingRequest domesticExpress = new ShippingRequest(Destination.DOMESTIC, Speed.EXPRESS, 10);
-        IO.println("Shipping cost: " + shippingService.quote(domesticExpress));
-
         ShippingRequest internationalStandard = new ShippingRequest(Destination.INTERNATIONAL, Speed.STANDARD, 10);
-        IO.println("Shipping cost: " + shippingService.quote(internationalStandard));
+
+        IO.println("\n=== Shipping Quote ===");
+
+        IO.println("Domestic Standard (10kg)");
+        IO.println("Estimated Charge: " + shippingService.quote(domesticStandardRequest));
+
+        IO.println();
+
+        IO.println("International Express (15kg)");
+        IO.println("Estimated Charge: " + shippingService.quote(internationalExpressRequest));
+
+        IO.println();
+
+        IO.println("Domestic Standard (5kg)");
+        IO.println("Estimated Charge: " + shippingService.quote(lightDomesticRequest));
+
+        IO.println();
+
+        IO.println("International Express (20kg)");
+        IO.println("Estimated Charge: " + shippingService.quote(heavyInternationalExpressRequest));
+
+        IO.println();
+
+        IO.println("Domestic Express (10kg)");
+        IO.println("Estimated Charge: " + shippingService.quote(domesticExpress));
+
+        IO.println();
+
+        IO.println("International Standard (10kg)");
+        IO.println("Estimated Charge: " + shippingService.quote(internationalStandard));
     }
 }

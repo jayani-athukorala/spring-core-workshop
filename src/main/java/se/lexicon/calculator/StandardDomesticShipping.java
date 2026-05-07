@@ -19,7 +19,7 @@ public class StandardDomesticShipping implements ShippingCostCalculator {
 
     @PostConstruct
     public void init() {
-        IO.println("StandardDomesticShipping bean created");
+        IO.println("✅ StandardDomesticShipping bean created.");
     }
 
     @Override

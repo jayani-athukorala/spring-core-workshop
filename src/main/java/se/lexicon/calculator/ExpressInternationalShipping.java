@@ -19,7 +19,7 @@ public class ExpressInternationalShipping implements ShippingCostCalculator {
 
     @PostConstruct
     public void init() {
-        IO.println("ExpressInternationalShipping bean created");
+        IO.println("✅ ExpressInternationalShipping bean created.");
     }
 
     @Override

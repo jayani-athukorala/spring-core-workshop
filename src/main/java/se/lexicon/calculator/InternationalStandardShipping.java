@@ -19,7 +19,7 @@ public class InternationalStandardShipping implements ShippingCostCalculator {
 
     @PostConstruct
     public void init() {
-        IO.println("InternationalStandardShipping bean created");
+        IO.println("✅ InternationalStandardShipping bean created.");
     }
 
     @Override
