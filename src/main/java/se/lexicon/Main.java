@@ -31,5 +31,12 @@ public class Main {
 
         ShippingRequest heavyInternationalExpressRequest = new ShippingRequest(Destination.INTERNATIONAL, Speed.EXPRESS, 20.0);
         System.out.println("Shipping cost: " + shippingService.quote(heavyInternationalExpressRequest));
+
+        // Test new Strategies
+        ShippingRequest domesticExpress = new ShippingRequest(Destination.DOMESTIC, Speed.EXPRESS, 10);
+        IO.println("Shipping cost: " + shippingService.quote(domesticExpress));
+
+        ShippingRequest internationalStandard = new ShippingRequest(Destination.INTERNATIONAL, Speed.STANDARD, 10);
+        IO.println("Shipping cost: " + shippingService.quote(internationalStandard));
     }
 }
