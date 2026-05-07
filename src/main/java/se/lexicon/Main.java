@@ -17,7 +17,14 @@ import java.util.List;
 public class Main {
     static void main() {
 
-        ApplicationContext context = new AnnotationConfigApplicationContext(ShippingCostCalculatorConfig.class);
+//        ApplicationContext context = new AnnotationConfigApplicationContext(ShippingCostCalculatorConfig.class);
+
+        //Pricing for DEV
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+        context.getEnvironment().setActiveProfiles("dev");
+        context.register(ShippingCostCalculatorConfig.class);
+        context.refresh();
+
         ShippingService shippingService = context.getBean(ShippingService.class);
 
         ShippingRequest domesticStandardRequest = new ShippingRequest(Destination.DOMESTIC, Speed.STANDARD, 10.0);
